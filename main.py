@@ -1,8 +1,20 @@
 import pygame
 import time
 import math
+import os # LISÄYS: Tuodaan os-kirjasto tiedostopolkuja varten
 from utils import scale_image, blit_rotate_center, blit_text_center
 pygame.font.init()
+
+# --- MUSIIKIN ALUSTUS JA TOISTO ---
+pygame.mixer.init() # LISÄYS: Alustetaan äänijärjestelmä
+try:
+    # LISÄYS: Ladataan ja soitetaan musiikki
+    pygame.mixer.music.load(os.path.join("sounds", "Retroracing.mp3"))
+    pygame.mixer.music.play(-1) # -1 soittaa musiikkia loputtomasti
+    pygame.mixer.music.set_volume(0.5) # Asettaa voimakkuuden (0.0 - 1.0)
+except Exception as e:
+    print(f"Virhe musiikin latauksessa: {e}")
+# ----------------------------------
 
 GRASS = scale_image(pygame.image.load("imgs/grass.jpg"), 2.5)
 TRACK = scale_image(pygame.image.load("imgs/track.png"), 0.9)
